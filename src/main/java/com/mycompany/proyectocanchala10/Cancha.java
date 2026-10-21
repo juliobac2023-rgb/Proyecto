@@ -3,81 +3,60 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.proyectocanchala10;
-import com.canchapro.enums.*;
 import java.time.LocalTime;
 /**
  *
  * @author julio
  */
 public class Cancha {
-    private final String Codigo;
+    private String Codigo;
     private String Nombre;
-    private final TipoDeCancha tipo;
-    private final int Capacidad;
-    private double PrecioBase;
-    private EstadoCancha Estado;
-    private final LocalTime Apertura;
-    private final LocalTime Cierre;
+    private String Tipo;
+    private int Capacidad;
+    private double Preciobase;
+    private String Estado;
+    private LocalTime Apertura;
+    private LocalTime Cirre;
     
-    public Cancha(String Codigo, String Nombre, TipoDeCancha tipo, int Capacidad,double PrecioBase, LocalTime Apertura, LocalTime Cierre){
+    public Cancha(String Codigo, String Nombre, String Tipo, int Capacidad, double Preciobase, String Estado, LocalTime Apertura, LocalTime Cirre){
         
         this.Codigo = Codigo;
         this.Nombre = Nombre;
-        this.tipo = tipo;
+        this.Tipo = Tipo;
         this.Capacidad = Capacidad;
-        this.PrecioBase = PrecioBase;
+        this.Preciobase = Preciobase;
+        this.Estado = Estado;
         this.Apertura = Apertura;
-        this.Cierre = Cierre;
-        
-        this.Estado = EstadoCancha.DISPONIBLE;            
+        this.Cirre = Cirre;  
     }
-    public boolean EstaActiva (){
-        return Estado == EstadoCancha.DISPONIBLE;
-    }
-    public boolean DentroDelHorario (LocalTime inicio, LocalTime fin){
-        return !inicio.isBefore(Apertura) && !fin.isAfter(Cierre) && fin.isAfter(inicio);
-    }
-    
-    public String getCodigo() {
+    public String getCodigo(){
         return Codigo;
     }
-    public String getNombre() {
+    public String getNombre(){
         return Nombre;
     }
-    public TipoDeCancha gettipo (){
-        return tipo;
+    public String getTipo(){
+        return Tipo;
     }
     public int getCapacidad(){
         return Capacidad;
     }
-    public double getPrecioBase(){
-        return PrecioBase;
+    public double Preciobase(){
+        return Preciobase;
     }
-    public EstadoCancha getEstado(){
+    public String getEstado(){
         return Estado;
     }
     public LocalTime getApertura(){
         return Apertura;
     }
     public LocalTime getCierre(){
-        return Cierre;
+        return Cirre;
     }
-    
-    public void setEstado (EstadoCancha Estado){
+    public void setEstado (String Estado){
         this.Estado = Estado;
     }
-    public void setNombre (String Nombre){
-        this.Nombre = Nombre;
-    }
     
-    public void setPrecioBase (double PrecioBase){
-        if (PrecioBase < 0) {
-            throw new IllegalArgumentException("Precio Incorrecto");
-        }
-        this.PrecioBase = PrecioBase;
-    }
-    @Override
-    public String toString(){
-        return Codigo + "-" + Nombre;
-    }
+            
+
 }   

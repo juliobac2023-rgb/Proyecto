@@ -10,34 +10,43 @@ import java.time.LocalDate;
  */
 public class Clientes {
     
-    private final String Codigo;
-    private final String Nombre;
-    private final String Telefono;
-    private final String Correo;
-    private final LocalDate fechaRegistro;
+    private  int Codigo;
+    private String Nombre;
+    private int Telefono;
+    private  String Correo;
+    private  LocalDate fecha;
     
-    public Clientes (String Codigo, String Nombre, String Telefono, String Correo){
-        this.Codigo = Codigo;
-        this.Nombre = Nombre;
-        this.Telefono = Telefono;
-        this.Correo = Correo;
-        this.fechaRegistro = LocalDate.now();
-    }
-    
-    public String getCodigo() {
-        return Codigo;
-    }
-    public String getNombre(){
-        return Nombre;
-    }
-    public String getTelefono(){
-        return Telefono;
-    }
-    public String getCorreo (){
-        return Correo;
-    }
-    public LocalDate getfechaRegistro(){
-        return fechaRegistro;
-    }
-    
+public Clientes (int Codigo, String Nombre, int Telefono, String Correo, LocalDate fecha){
+        
+    this.Codigo = Codigo;
+    this.Nombre = Nombre;
+    this.Telefono = Telefono;
+    this.Correo = Correo;
+    this.fecha = fecha;
 }
+public int getCodigo(){
+    return Codigo;
+}
+public String getNombre(){
+    return Nombre;
+}
+public int getTelefono(){
+    return Telefono;
+}
+public String Correo(){
+    return Correo;
+}
+public LocalDate getfecha(){
+    return fecha;
+}
+public void Editar (String Nombre, int Telefono, String Correo){
+    this.Nombre = Nombre;
+    this.Telefono = Telefono;
+    this.Correo = Correo;
+}
+
+}
+
+
+    
+    
