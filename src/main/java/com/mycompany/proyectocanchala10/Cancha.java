@@ -3,60 +3,71 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.proyectocanchala10;
+
+
 import java.time.LocalTime;
-/**
- *
- * @author julio
- */
+
 public class Cancha {
-    private String Codigo;
-    private String Nombre;
-    private String Tipo;
-    private int Capacidad;
-    private double Preciobase;
-    private String Estado;
-    private LocalTime Apertura;
-    private LocalTime Cirre;
-    
-    public Cancha(String Codigo, String Nombre, String Tipo, int Capacidad, double Preciobase, String Estado, LocalTime Apertura, LocalTime Cirre){
-        
-        this.Codigo = Codigo;
-        this.Nombre = Nombre;
-        this.Tipo = Tipo;
-        this.Capacidad = Capacidad;
-        this.Preciobase = Preciobase;
-        this.Estado = Estado;
-        this.Apertura = Apertura;
-        this.Cirre = Cirre;  
+
+    private String codigo;
+    private String nombre;
+    private String tipo;
+    private int capacidad;
+    private double precioBase;
+    private String estado;
+    private LocalTime horaApertura;
+    private LocalTime horaCierre;
+
+    public Cancha(String codigo, String nombre,String tipo, int capacidad,double precioBase, String estado,LocalTime horaApertura, LocalTime horaCierre) {
+
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.capacidad = capacidad;
+        this.precioBase = precioBase;
+        this.estado = estado;
+        this.horaApertura = horaApertura;
+        this.horaCierre = horaCierre;
     }
-    public String getCodigo(){
-        return Codigo;
+
+    public String getCodigo() {
+        return codigo;
     }
-    public String getNombre(){
-        return Nombre;
+
+    public String getNombre() {
+        return nombre;
     }
-    public String getTipo(){
-        return Tipo;
+
+    public String getTipo() {
+        return tipo;
     }
-    public int getCapacidad(){
-        return Capacidad;
+
+    public int getCapacidad() {
+        return capacidad;
     }
-    public double Preciobase(){
-        return Preciobase;
+
+    public double getPrecioBase() {
+        return precioBase;
     }
-    public String getEstado(){
-        return Estado;
+
+    public String getEstado() {
+        return estado;
     }
-    public LocalTime getApertura(){
-        return Apertura;
+
+    public LocalTime getHoraApertura() {
+        return horaApertura;
     }
-    public LocalTime getCierre(){
-        return Cirre;
+
+    public LocalTime getHoraCierre() {
+        return horaCierre;
     }
-    public void setEstado (String Estado){
-        this.Estado = Estado;
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
+}
+
     
             
 
-}   
+

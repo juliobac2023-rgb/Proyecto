@@ -8,6 +8,8 @@ package com.mycompany.proyectocanchala10;
  * @author julio
  */
 public class ServicioAdicional {
+
+    static int length;
  
     private String Nombre;
     private double Precio;
