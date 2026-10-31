@@ -98,6 +98,21 @@ public class GestorCanchas {
         return texto;
     }
 
+    // NUEVO: cambia el estado de una cancha
+    // (DISPONIBLE, MANTENIMIENTO o INACTIVA).
+    public boolean cambiarEstado(String codigo, String estado) {
+
+        Cancha c = buscar(codigo);
+
+        if (c == null || !estadoValido(estado)) {
+            return false;
+        }
+
+        c.setEstado(estado);
+
+        return true;
+    }
+
     public Cancha[] getCanchas() {
         return canchas;
     }

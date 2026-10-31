@@ -4,10 +4,7 @@
  */
 package com.mycompany.proyectocanchala10;
 
-import java.io.File;
-
-import java.io.File;
-
+// CORREGIDO: el import de File estaba repetido 3 veces; basta con uno.
 import java.io.File;
 
 public class Archivos {
@@ -22,8 +19,13 @@ public class Archivos {
 
     private ArchivosPagos archivoPagos = new ArchivosPagos();
 
+    // NUEVO: archivo de la tienda (productos y ventas).
+    private ArchivosTienda archivoTienda = new ArchivosTienda();
+
+    // NUEVO: ahora tambien recibe el gestor de la tienda.
     public void guardar(gestorClientes clientes,
-            GestorCanchas canchas, gestorReserva reservas) {
+            GestorCanchas canchas, gestorReserva reservas,
+            GestorTienda tienda) {
 
         new File("datos").mkdirs();
 
@@ -32,10 +34,12 @@ public class Archivos {
         archivoReservas.guardar(reservas);
         archivoServicios.guardar(reservas);
         archivoPagos.guardar(reservas);
+        archivoTienda.guardar(tienda);
     }
 
     public void cargar(gestorClientes clientes,
-            GestorCanchas canchas, gestorReserva reservas) {
+            GestorCanchas canchas, gestorReserva reservas,
+            GestorTienda tienda) {
 
         new File("datos").mkdirs();
 
@@ -44,5 +48,6 @@ public class Archivos {
         archivoReservas.cargar(reservas, clientes, canchas);
         archivoServicios.cargar(reservas);
         archivoPagos.cargar(reservas);
+        archivoTienda.cargar(tienda);
     }
 }

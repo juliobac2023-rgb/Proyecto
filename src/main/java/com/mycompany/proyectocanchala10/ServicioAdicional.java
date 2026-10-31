@@ -9,8 +9,9 @@ package com.mycompany.proyectocanchala10;
  */
 public class ServicioAdicional {
 
-    static int length;
- 
+    // CORREGIDO: se elimino "static int length;" (siempre valia 0 y
+    // rompia agregarServicio en Reserva). El limite lo da servicios.length.
+
     private String Nombre;
     private double Precio;
     

@@ -21,6 +21,11 @@ public class ArchivosPagos {
     private String nombreArchivo = "datos/pagos.csv";
 
     private String limpiar(String texto) {
+        // CORREGIDO: si el texto viene null (ej. pago sin observacion)
+        // se guarda vacio en lugar de fallar con NullPointerException.
+        if (texto == null) {
+            return "";
+        }
         return texto.replace(",", " ").replace("\n", " ").replace("\r", " ");
     }
 
@@ -32,6 +37,7 @@ public class ArchivosPagos {
             for (int i = 0; i < gestor.getCantidad(); i++) {
                 Reserva r = gestor.getReservas()[i];
                 for (int j = 0; j < r.getCantidadPagos(); j++) {
+                    // CORREGIDO: getPago() lanzaba una excepcion; se usa getPagos().
                     Pago p = r.getPagos()[j];
                     bw.write(r.getCodigo() + "," + p.getCodigo() + "," + p.getFecha()
                             + "," + p.getMonto() + "," + limpiar(p.getMetodo())

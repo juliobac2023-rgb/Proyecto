@@ -120,6 +120,30 @@ public class gestorClientes {
         return cantidad == 0 ? "No hay clientes." : texto;
     }
 
+    // NUEVO: edita un cliente. Valida que nombre y telefono no esten
+    // vacios y que el telefono no lo tenga otro cliente.
+    public boolean editar(int codigo, String nombre,
+            String telefono, String correo) {
+
+        Cliente c = buscarCodigo(codigo);
+
+        if (c == null
+                || nombre.trim().isEmpty()
+                || telefono.trim().isEmpty()) {
+            return false;
+        }
+
+        Cliente otro = buscarTelefono(telefono);
+
+        if (otro != null && otro != c) {
+            return false;
+        }
+
+        c.editar(nombre, telefono, correo);
+
+        return true;
+    }
+
     public Cliente[] getClientes() {
         return clientes;
     }

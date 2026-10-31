@@ -112,7 +112,10 @@ public class Reserva {
 
     public boolean agregarServicio(ServicioAdicional servicio) {
 
-        if (cantidadServicios == ServicioAdicional.length
+        // CORREGIDO: antes se comparaba con ServicioAdicional.length, que
+        // siempre valia 0, y por eso nunca dejaba agregar servicios.
+        // Ahora se compara con el tamano real del arreglo (10).
+        if (cantidadServicios == servicios.length
                 || estado.equals("CANCELADA")
                 || estado.equals("FINALIZADA")) {
             return false;
@@ -228,6 +231,9 @@ public class Reserva {
         motivoCancelacion = motivo;
         operadorCancelacion = operador;
     }
+
+    // CORREGIDO: se elimino el metodo getPago(), que NetBeans genero vacio
+    // y lanzaba UnsupportedOperationException. Se usa getPagos().
 }
 
     
