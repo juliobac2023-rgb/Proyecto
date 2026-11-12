@@ -144,6 +144,19 @@ public class gestorClientes {
         return true;
     }
 
+    // Dice si un cliente coincide con lo escrito en el buscador:
+    // por codigo exacto, o por parte del nombre o del telefono.
+    // Un texto vacio coincide con todos.
+    public boolean coincide(Cliente c, String texto) {
+
+        String buscado = texto.trim().toLowerCase();
+
+        return buscado.isEmpty()
+                || String.valueOf(c.getCodigo()).equals(buscado)
+                || c.getNombre().toLowerCase().contains(buscado)
+                || c.getTelefono().contains(buscado);
+    }
+
     public Cliente[] getClientes() {
         return clientes;
     }

@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyectocanchala10;
 
-// CORREGIDO: el import de File estaba repetido 3 veces; basta con uno.
 import java.io.File;
 
+// Coordina todos los archivos del sistema: cada modulo tiene su propia
+// clase de archivos y esta las llama en el orden correcto.
 public class Archivos {
 
     private Archivoclientes archivoClientes = new Archivoclientes();
@@ -19,16 +16,19 @@ public class Archivos {
 
     private ArchivosPagos archivoPagos = new ArchivosPagos();
 
-    // NUEVO: archivo de la tienda (productos y ventas).
+    // Archivos de la tienda (productos, ventas y detalle de ventas).
     private ArchivosTienda archivoTienda = new ArchivosTienda();
 
-    // NUEVO: ahora tambien recibe el gestor de la tienda.
+    // Tarifas de referencia (tarifas.csv).
+    private ArchivosTarifas archivoTarifas = new ArchivosTarifas();
+
     public void guardar(gestorClientes clientes,
             GestorCanchas canchas, gestorReserva reservas,
             GestorTienda tienda) {
 
         new File("datos").mkdirs();
 
+        archivoTarifas.guardar();
         archivoClientes.guardar(clientes);
         archivoCanchas.guardar(canchas);
         archivoReservas.guardar(reservas);
@@ -37,12 +37,15 @@ public class Archivos {
         archivoTienda.guardar(tienda);
     }
 
+    // El orden importa: las reservas necesitan que ya existan los clientes
+    // y las canchas; los servicios y pagos necesitan las reservas.
     public void cargar(gestorClientes clientes,
             GestorCanchas canchas, gestorReserva reservas,
             GestorTienda tienda) {
 
         new File("datos").mkdirs();
 
+        archivoTarifas.cargar();
         archivoClientes.cargar(clientes);
         archivoCanchas.cargar(canchas);
         archivoReservas.cargar(reservas, clientes, canchas);

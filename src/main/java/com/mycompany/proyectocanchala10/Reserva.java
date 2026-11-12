@@ -129,6 +129,15 @@ public class Reserva {
         return true;
     }
 
+    // Dice si a la reserva todavia le caben "cuantos" servicios mas.
+    // La tienda lo usa antes de cargar una venta con varios productos.
+    public boolean puedeAgregarServicios(int cuantos) {
+
+        return cantidadServicios + cuantos <= servicios.length
+                && !estado.equals("CANCELADA")
+                && !estado.equals("FINALIZADA");
+    }
+
     // Recupera un servicio ya guardado en un archivo.
     public void cargarServicio(ServicioAdicional servicio) {
 

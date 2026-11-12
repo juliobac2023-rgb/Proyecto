@@ -52,7 +52,13 @@ public class MenuConsola {
                     menuReservas();
                     break;
                 case 4:
-                    menuTienda();
+                    // El modulo de tienda se activa en datos/configuracion.txt
+                    if (ProyectoCanchaLa10.configuracion.isModuloTienda()) {
+                        menuTienda();
+                    } else {
+                        System.out.println("El modulo de tienda esta desactivado "
+                                + "(modulo_tienda=false en datos/configuracion.txt).");
+                    }
                     break;
                 case 5:
                     menuReportes();
@@ -580,10 +586,12 @@ public class MenuConsola {
 
         String codigo = leerTexto("Codigo (ej. P05): ");
         String nombre = leerTexto("Nombre: ");
+        String categoria = leerTexto("Categoria (ej. Bebidas): ");
         double precio = leerDecimal("Precio (Q): ");
         int stock = leerEntero("Stock inicial: ");
+        int minimo = leerEntero("Stock minimo (para el aviso de stock bajo): ");
 
-        if (tienda.registrar(codigo, nombre, precio, stock)) {
+        if (tienda.registrar(codigo, nombre, categoria, precio, stock, minimo)) {
             System.out.println("Producto registrado.");
         } else {
             System.out.println("No se pudo registrar: codigo repetido, "
@@ -631,7 +639,9 @@ public class MenuConsola {
 
         int unidades = leerEntero("Cantidad: ");
 
-        Venta v = tienda.venderSuelta(p, unidades);
+        String metodo = elegirOpcion("Metodo de pago", metodosPago);
+
+        Venta v = tienda.venderSuelta(p, unidades, metodo);
 
         if (v == null) {
             System.out.println("No se pudo vender: cantidad invalida "
@@ -689,8 +699,14 @@ public class MenuConsola {
 
             switch (opcion) {
                 case 1:
+                    mostrarReporte(1);
+                    break;
                 case 2:
-                    mostrarReporte(opcion);
+                    if (ProyectoCanchaLa10.configuracion.isModuloTienda()) {
+                        mostrarReporte(2);
+                    } else {
+                        System.out.println("El modulo de tienda esta desactivado.");
+                    }
                     break;
                 case 0:
                     break;

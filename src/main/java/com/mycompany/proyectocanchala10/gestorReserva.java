@@ -36,6 +36,19 @@ public class gestorReserva {
             return false;
         }
 
+        // Esta libre solo si ninguna reserva ocupa ese horario.
+        return ocupante(cancha, fecha, inicio, fin) == null;
+    }
+
+    // REGLA DE TRASLAPE (el corazon del sistema). Devuelve la reserva que
+    // ocupa la cancha entre "inicio" y "fin" de esa fecha, o null si esta
+    // libre. Hay conflicto cuando:
+    //     inicioNuevo < finExistente  Y  finNuevo > inicioExistente
+    // Por eso una reserva que empieza justo cuando termina otra SI se acepta.
+    // Las reservas canceladas no ocupan la cancha.
+    public Reserva ocupante(Cancha cancha, LocalDate fecha,
+            LocalTime inicio, LocalTime fin) {
+
         for (int i = 0; i < cantidad; i++) {
 
             Reserva r = reservas[i];
@@ -46,11 +59,82 @@ public class gestorReserva {
                     && inicio.isBefore(r.getFin())
                     && fin.isAfter(r.getInicio())) {
 
-                return false;
+                return r;
             }
         }
 
-        return true;
+        return null;
+    }
+
+    // INDICADORES PARA LA PANTALLA DE INICIO
+
+    // Reservas de una fecha, sin contar las canceladas.
+    public int contarFecha(LocalDate fecha) {
+
+        int total = 0;
+
+        for (int i = 0; i < cantidad; i++) {
+
+            if (reservas[i].getFecha().equals(fecha)
+                    && !reservas[i].getEstado().equals("CANCELADA")) {
+                total++;
+            }
+        }
+
+        return total;
+    }
+
+    // Reservas que estan en un estado (PENDIENTE, EN_CURSO, etc.).
+    public int contarEstado(String estado) {
+
+        int total = 0;
+
+        for (int i = 0; i < cantidad; i++) {
+
+            if (reservas[i].getEstado().equals(estado)) {
+                total++;
+            }
+        }
+
+        return total;
+    }
+
+    // Reservas no canceladas que todavia deben dinero.
+    public int contarConSaldo() {
+
+        int total = 0;
+
+        for (int i = 0; i < cantidad; i++) {
+
+            if (!reservas[i].getEstado().equals("CANCELADA")
+                    && reservas[i].getSaldo() > 0) {
+                total++;
+            }
+        }
+
+        return total;
+    }
+
+    // Suma de los pagos recibidos entre dos fechas.
+    public double ingresos(LocalDate desde, LocalDate hasta) {
+
+        double total = 0;
+
+        for (int i = 0; i < cantidad; i++) {
+
+            Reserva r = reservas[i];
+
+            for (int j = 0; j < r.getCantidadPagos(); j++) {
+
+                LocalDate dia = r.getPagos()[j].getFecha().toLocalDate();
+
+                if (!dia.isBefore(desde) && !dia.isAfter(hasta)) {
+                    total += r.getPagos()[j].getMonto();
+                }
+            }
+        }
+
+        return total;
     }
 
     public String consultar(GestorCanchas gestor,
